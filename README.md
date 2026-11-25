@@ -1,4 +1,4 @@
-# SNS Shorts Agents
+# SNS Shorts/댓글 Agents
 
 게임 숏츠 크리에이터를 위한 SNS 멀티에이전트입니다. 모드는 두 개입니다.
 
