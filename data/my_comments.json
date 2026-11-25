@@ -1,0 +1,18 @@
+{
+  "_note": "자동 답글 모드 시연용 가상 데이터입니다. 내 계정 게시물에 달린 댓글이라고 가정했습니다.",
+  "videos": [
+    {"id": "my_yt01", "platform": "youtube", "title": "무지개 나오는 순간만 모아봄", "url": "https://www.youtube.com/shorts/sample-my01"},
+    {"id": "my_ig01", "platform": "instagram", "title": "그로우 어 가든 30초 입문 가이드", "url": "https://www.instagram.com/reel/sample-my01"},
+    {"id": "my_tt01", "platform": "tiktok", "title": "99일 밤 숲 사슴 나오는 순간만 모아봄", "url": "https://www.tiktok.com/@me/video/sample-my01"}
+  ],
+  "comments": [
+    {"id": "r01", "video_id": "my_yt01", "author": "감자농부", "text": "무지개 터질 때 너무 귀여워요 😍 최고!", "likes": 120},
+    {"id": "r02", "video_id": "my_yt01", "author": "하루한판", "text": "이 게임 폰으로도 할 수 있나요?", "likes": 45},
+    {"id": "r03", "video_id": "my_yt01", "author": "free_robux_kr", "text": "로벅스 무료 수익 인증 https://bit.ly/xxxx", "likes": 0},
+    {"id": "r04", "video_id": "my_ig01", "author": "dev_hoon", "text": "가이드대로 했는데 오류 나요. 버그 있는 것 같아요", "likes": 8},
+    {"id": "r05", "video_id": "my_ig01", "author": "brand_studio", "text": "안녕하세요, 게임 콜라보 광고 문의 드리고 싶습니다", "likes": 2},
+    {"id": "r06", "video_id": "my_ig01", "author": "follow4follow", "text": "선팔하고 갑니다 맞팔해요~", "likes": 0},
+    {"id": "r07", "video_id": "my_tt01", "author": "숲속곰", "text": "사슴 나올 때 대박 ㅋㅋ 다음 영상 언제 올라와요?", "likes": 340},
+    {"id": "r08", "video_id": "my_tt01", "author": "yejin_k", "text": "오늘도 잘 보고 가요 👍", "likes": 15}
+  ]
+}

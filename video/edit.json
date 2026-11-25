@@ -1,0 +1,66 @@
+{
+  "output": "media/demo.mp4",
+  "spec": {
+    "resolution": "1920x1080",
+    "fps": 24,
+    "codec": "H.264 (libx264, yuv420p)",
+    "length_sec": 90
+  },
+  "thumbnail": "media/thumbnail.png (첫 3초 + mp4 커버 이미지)",
+  "shots": [
+    {
+      "n": 1,
+      "src": "build/thumbnail.png",
+      "dur": 3,
+      "note": "타이틀 = 썸네일"
+    },
+    {
+      "n": 2,
+      "src": "build/arch.png",
+      "dur": 6,
+      "note": "에이전트 구조"
+    },
+    {
+      "n": 3,
+      "src": "build/term.webm",
+      "in": 0.3,
+      "dur": 11,
+      "note": "CLI 실행 (앞 0.3초 컷)"
+    },
+    {
+      "n": 4,
+      "src": "build/viewer.webm",
+      "in": 0.3,
+      "dur": 31,
+      "note": "웹 뷰어: 분류 → 기획 → 검수 → 기획안"
+    },
+    {
+      "n": 5,
+      "src": "build/plan.png",
+      "dur": 6,
+      "note": "저장된 기획안 md"
+    },
+    {
+      "n": 6,
+      "src": "build/arch2.png",
+      "dur": 6,
+      "note": "모드 2 구조 (플랫폼별 게시)"
+    },
+    {
+      "n": 7,
+      "src": "build/reply.webm",
+      "in": 0.3,
+      "dur": 22,
+      "note": "답글 모드 뷰어"
+    },
+    {
+      "n": 8,
+      "src": "build/outro.png",
+      "dur": 5,
+      "note": "사용법 / GitHub"
+    }
+  ],
+  "subtitles": "subs.srt, 하단 중앙",
+  "bgm": "ffmpeg로 생성한 잔잔한 패드, 낮은 볼륨, 끝 1.5초 페이드아웃",
+  "check": "렌더 후 ffprobe로 길이·해상도·fps·코덱 확인"
+}

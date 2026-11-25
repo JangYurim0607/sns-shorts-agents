@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SNS Shorts Agents · 인기 게임 숏츠 반응으로 기획안 만들기</title>
+<style>
+  :root{--bg:#0f1115;--panel:#171a21;--card:#1d212b;--line:#262b36;--text:#e8eaf0;--sub:#8b93a7;--pink:#ff4f8b;--violet:#8b5cf6;--orange:#ffb020;--green:#22c55e}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:"Pretendard","Noto Sans CJK KR","Noto Sans KR",system-ui,sans-serif;height:100vh;display:flex;flex-direction:column}
+  header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--line)}
+  h1{font-size:19px;margin:0;font-weight:700}
+  h1 span{background:linear-gradient(90deg,var(--orange),var(--pink),var(--violet));-webkit-background-clip:text;color:transparent}
+  .controls{display:flex;gap:8px;align-items:center}
+  button{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 13px;font:inherit;font-size:13px;cursor:pointer}
+  button.primary{background:var(--pink);border-color:var(--pink);color:#fff;font-weight:600}
+  .mode{font-size:12px;color:var(--sub)}
+  main{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1.05fr 1fr;gap:16px;padding:16px 24px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;min-height:0}
+  .sec{padding:12px 14px 8px;font-size:13px;color:var(--sub);font-weight:600;display:flex;justify-content:space-between}
+  .scroll{overflow:auto;padding:0 14px 14px;flex:1}
+  .vid{margin-bottom:12px;background:var(--card);border-radius:10px;padding:10px}
+  .vh{display:flex;gap:8px;align-items:center;font-size:13px;margin-bottom:6px}
+  .pf{font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;color:#fff;flex:none}
+  .pf.youtube{background:#e11d48}.pf.instagram{background:linear-gradient(90deg,#f59e0b,#ec4899,#8b5cf6)}.pf.tiktok{background:#111;border:1px solid #444}
+  .vt{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vs{color:var(--sub);font-size:11px;margin-left:auto;flex:none}
+  .cm{font-size:12.5px;padding:5px 4px;border-top:1px solid var(--line);display:flex;gap:6px;align-items:center;transition:background .3s}
+  .cm.active{background:rgba(255,79,139,.12)}
+  .cm .t{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cm .lk{color:var(--sub);font-size:11px;flex:none}
+  .cm.spam .t{text-decoration:line-through;color:var(--sub)}
+  .b{font-size:10.5px;padding:1px 7px;border-radius:999px;font-weight:700;color:#fff;flex:none}
+  .graph{position:relative;height:300px;flex:none}
+  .node{position:absolute;width:128px;padding:8px;border-radius:11px;background:var(--card);border:1.5px solid var(--line);text-align:center;transition:all .25s}
+  .node b{display:block;font-size:13px}.node small{color:var(--sub);font-size:10.5px}
+  .node.on{border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,79,139,.18);transform:scale(1.05)}
+  svg.links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  svg.links path{stroke:#333a48;stroke-width:2;fill:none}
+  svg.links path.on{stroke:var(--pink);stroke-width:3}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 14px 12px}
+  .stat{background:var(--card);border-radius:10px;padding:8px;text-align:center}
+  .stat b{font-size:22px;display:block}.stat small{color:var(--sub);font-size:11px}
+  .log{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;overflow:auto;padding:10px 14px;border-top:1px solid var(--line);flex:1;min-height:0}
+  .log div{padding:1px 0;color:#c4c9d6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .log .k{color:var(--orange)}
+  .idea{background:var(--card);border-radius:10px;padding:11px 12px;margin-bottom:10px;border-left:3px solid var(--violet);animation:pop .35s}
+  .idea.approve{border-left-color:var(--green)}.idea.escalate{border-left-color:var(--orange)}
+  .idea .tt{font-weight:800;font-size:15px;margin:4px 0}
+  .idea .meta{font-size:11.5px;color:var(--sub)}
+  .idea .hk{font-size:12.5px;margin-top:5px;color:#d6d9e2}
+  .idea .st{float:right;font-size:11px;font-weight:700}
+  .kw{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 12px}
+  .kw span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px}
+  @keyframes pop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+</style>
+</head>
+<body>
+<header>
+  <h1><span>SNS Shorts Agents</span> · 인기 게임 숏츠 반응으로 기획안 만들기</h1>
+  <div class="controls">
+    <span class="mode" id="mode"></span>
+    <button id="speed">속도 1x</button>
+    <button id="reset">처음으로</button>
+    <button class="primary" id="play">▶ 재생</button>
+  </div>
+</header>
+<main>
+  <section class="card">
+    <div class="sec"><span>① 수집한 인기 숏츠와 댓글</span><span id="vc"></span></div>
+    <div class="scroll" id="videos"></div>
+  </section>
+  <section class="card">
+    <div class="sec"><span>에이전트 협업 흐름</span></div>
+    <div class="graph" id="graph"><svg class="links" id="links"></svg></div>
+    <div class="stats">
+      <div class="stat"><b id="s-cls">0</b><small>댓글 분류</small></div>
+      <div class="stat"><b id="s-idea">0</b><small>아이디어</small></div>
+      <div class="stat"><b id="s-rev">0</b><small>수정 요청</small></div>
+      <div class="stat"><b id="s-human">0</b><small>사람 확인</small></div>
+    </div>
+    <div class="log" id="log"></div>
+  </section>
+  <section class="card">
+    <div class="sec"><span>⑤ 숏츠 기획안</span><span id="saved"></span></div>
+    <div class="scroll" id="ideas"></div>
+    <div class="sec"><span>반복 키워드</span></div>
+    <div class="kw" id="kw"></div>
+  </section>
+</main>
+<script src="latest.js"></script>
+<script>
+const RUN=window.RUN;
+const LB={scene:["터진 장면","#e11d48"],game_interest:["게임 관심","#3b82f6"],request:["요청","#8b5cf6"],complaint:["불만","#f59e0b"],praise:["단순 반응","#64748b"],spam:["스팸","#374151"]};
+const TY={scene:"터진 장면 재구성",request:"요청 주제 · 아직 없는 영상",game_interest:"입문 가이드"};
+const NODES={orchestrator:{x:.5,y:.09,l:"Orchestrator",s:"작업 분배"},collector:{x:.14,y:.42,l:"① Collector",s:"SNS 댓글 수집"},classifier:{x:.5,y:.42,l:"② Classifier",s:"반응 분류"},planner:{x:.86,y:.42,l:"③ Planner",s:"기획 아이디어"},reviewer:{x:.86,y:.85,l:"④ Reviewer",s:"검수"},reporter:{x:.5,y:.85,l:"⑤ Reporter",s:"기획안 저장"},human:{x:.14,y:.85,l:"🙋 사람 확인",s:"직접 판단"}};
+const fmt=n=>n==null?"":n>=10000?(n/10000).toFixed(n>=100000?0:1)+"만":n.toLocaleString();
+const graph=document.getElementById('graph'),svg=document.getElementById('links');
+function pos(n){const r=graph.getBoundingClientRect();return{x:NODES[n].x*r.width,y:NODES[n].y*r.height}}
+function drawGraph(){graph.querySelectorAll('.node').forEach(e=>e.remove());
+  for(const[k,n]of Object.entries(NODES)){const d=document.createElement('div');d.className='node';d.id='n-'+k;d.innerHTML=`<b>${n.l}</b><small>${n.s}</small>`;const p=pos(k);d.style.left=(p.x-64)+'px';d.style.top=(p.y-24)+'px';graph.appendChild(d)}
+  const pr=[["orchestrator","collector"],["orchestrator","classifier"],["orchestrator","planner"],["planner","reviewer"],["reviewer","orchestrator"],["orchestrator","reporter"],["orchestrator","human"]];
+  svg.innerHTML=pr.map(([a,b])=>{const p=pos(a),q=pos(b);return`<path id="l-${a}-${b}" d="M${p.x},${p.y} L${q.x},${q.y}"/>`}).join('')}
+const byC=Object.fromEntries(RUN.comments.map(c=>[c.id,c]));
+const byI=Object.fromEntries(RUN.ideas.map(i=>[i.id,i]));
+function drawVideos(){
+  document.getElementById('vc').textContent=`영상 ${RUN.videos.length} · 댓글 ${RUN.comments.length}`;
+  document.getElementById('videos').innerHTML=RUN.videos.map(v=>`<div class="vid"><div class="vh"><span class="pf ${v.platform}">${({youtube:"YouTube",instagram:"Instagram",tiktok:"TikTok"})[v.platform]||v.platform}</span><span class="vt">${v.title}</span><span class="vs">${v.views?"조회 "+fmt(v.views):"♥ "+fmt(v.likes)}</span></div>`+
+    RUN.comments.filter(c=>c.video_id===v.id).map(c=>`<div class="cm" id="c-${c.id}"><span class="t">${c.text}</span><span class="lk">♥${fmt(c.likes)}</span></div>`).join('')+`</div>`).join('');
+}
+const m=Object.values(RUN.agent_modes);document.getElementById('mode').textContent=m.every(x=>x.startsWith('LLM'))?'LLM + SKILL.md 모드':'데모(rule-based) 모드';
+let i=0,timer=null,speed=1,st;const logEl=document.getElementById('log'),ideasEl=document.getElementById('ideas');
+function flash(a,b){document.querySelectorAll('.on').forEach(e=>e.classList.remove('on'));[a,b].forEach(n=>{const e=document.getElementById('n-'+n);e&&e.classList.add('on')});const l=document.getElementById(`l-${a}-${b}`)||document.getElementById(`l-${b}-${a}`);l&&l.classList.add('on')}
+function ideaCard(id){const x=byI[id];let el=document.getElementById('i-'+id);if(!el){el=document.createElement('div');el.className='idea';el.id='i-'+id;ideasEl.prepend(el)}return el}
+function renderIdea(id,title,status){const x=byI[id],el=ideaCard(id);el.className='idea '+(status||'');
+  const s={approve:['✓ 승인','var(--green)'],escalate:['사람 확인','var(--orange)'],revise:['✎ 수정 중','var(--pink)']}[status]||['검수 대기','var(--sub)'];
+  el.innerHTML=`<span class="st" style="color:${s[1]}">${s[0]}</span><div class="meta">${x.game} · ${TY[x.type]}</div><div class="tt">${title}</div><div class="hk">${x.hook}</div><div class="meta" style="margin-top:5px">근거 댓글 ${x.evidence.length}개 · ♥ ${fmt(x.evidence_likes)}</div>`}
+const cur={};
+function step(){if(i>=RUN.events.length){stop();return}
+  const e=RUN.events[i++],p=e.payload;flash(e.from,e.to);
+  document.querySelectorAll('.cm.active').forEach(x=>x.classList.remove('active'));
+  const el=p.comment_id&&document.getElementById('c-'+p.comment_id);
+  if(el){el.classList.add('active');el.scrollIntoView({block:'nearest',behavior:'smooth'})}
+  if(e.kind==='classified'&&el){st.cls++;const[t,c]=LB[p.label];const b=document.createElement('span');b.className='b';b.style.background=c;b.textContent=t;el.insertBefore(b,el.firstChild);if(p.label==='spam')el.classList.add('spam')}
+  if(e.kind==='idea'){if(!cur[p.id])st.idea++;cur[p.id]=p.title;renderIdea(p.id,p.title,p.revision>1?'':'')}
+  if(e.kind==='review'){const id=p.idea_id;if(p.verdict==='revise')st.rev++;renderIdea(id,cur[id],p.verdict)}
+  if(e.kind==='escalate'){st.human++}
+  if(e.kind==='saved'){document.getElementById('saved').textContent='plans/shorts_plan.md 저장됨';document.getElementById('kw').innerHTML=RUN.keywords.map(([w,n])=>`<span>${w} · ${n}</span>`).join('')}
+  for(const k in st)document.getElementById('s-'+k).textContent=st[k];
+  const line=document.createElement('div');line.innerHTML=`<span class="k">${e.from} → ${e.to}</span> ${e.kind} ${JSON.stringify(p).slice(0,100)}`;logEl.appendChild(line);logEl.scrollTop=logEl.scrollHeight}
+function play(){if(timer)return;document.getElementById('play').textContent='⏸ 일시정지';timer=setInterval(step,380/speed)}
+function stop(){clearInterval(timer);timer=null;document.getElementById('play').textContent='▶ 재생'}
+function reset(){stop();i=0;st={cls:0,idea:0,rev:0,human:0};for(const k in cur)delete cur[k];logEl.innerHTML='';ideasEl.innerHTML='';document.getElementById('kw').innerHTML='';document.getElementById('saved').textContent='';drawVideos();for(const k in st)document.getElementById('s-'+k).textContent=0}
+document.getElementById('play').onclick=()=>timer?stop():play();
+document.getElementById('reset').onclick=reset;
+document.getElementById('speed').onclick=()=>{speed=speed===1?2:speed===2?.5:1;document.getElementById('speed').textContent=`속도 ${speed}x`;if(timer){stop();play()}};
+window.addEventListener('resize',drawGraph);drawGraph();reset();
+if(new URLSearchParams(location.search).get('autoplay'))setTimeout(play,800);
+</script>
+</body>
+</html>

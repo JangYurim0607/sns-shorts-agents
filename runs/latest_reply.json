@@ -1,0 +1,843 @@
+{
+  "summary": {
+    "dry-run": 5,
+    "needs-human": 1,
+    "manual": 2
+  },
+  "agent_modes": {
+    "reply_classifier": "rule-based",
+    "responder": "rule-based",
+    "moderator": "rule-based"
+  },
+  "videos": [
+    {
+      "id": "my_yt01",
+      "platform": "youtube",
+      "title": "무지개 나오는 순간만 모아봄",
+      "url": "https://www.youtube.com/shorts/sample-my01"
+    },
+    {
+      "id": "my_ig01",
+      "platform": "instagram",
+      "title": "그로우 어 가든 30초 입문 가이드",
+      "url": "https://www.instagram.com/reel/sample-my01"
+    },
+    {
+      "id": "my_tt01",
+      "platform": "tiktok",
+      "title": "99일 밤 숲 사슴 나오는 순간만 모아봄",
+      "url": "https://www.tiktok.com/@me/video/sample-my01"
+    }
+  ],
+  "results": [
+    {
+      "comment": {
+        "id": "r01",
+        "video_id": "my_yt01",
+        "author": "감자농부",
+        "text": "무지개 터질 때 너무 귀여워요 😍 최고!",
+        "likes": 120,
+        "platform": "youtube",
+        "username": "감자농부"
+      },
+      "class": {
+        "label": "praise",
+        "sentiment": "positive",
+        "priority": 3,
+        "reason": "긍정 반응",
+        "comment_id": "r01"
+      },
+      "draft": {
+        "reply": "@감자농부 좋게 봐주셔서 정말 감사해요 😊 다음 콘텐츠도 기대해 주세요!",
+        "action": "reply",
+        "comment_id": "r01",
+        "revision": 1
+      },
+      "review": {
+        "verdict": "approve",
+        "note": "톤·길이 OK",
+        "comment_id": "r01"
+      },
+      "publish": {
+        "comment_id": "r01",
+        "platform": "youtube",
+        "action": "reply",
+        "status": "dry-run"
+      }
+    },
+    {
+      "comment": {
+        "id": "r02",
+        "video_id": "my_yt01",
+        "author": "하루한판",
+        "text": "이 게임 폰으로도 할 수 있나요?",
+        "likes": 45,
+        "platform": "youtube",
+        "username": "하루한판"
+      },
+      "class": {
+        "label": "question",
+        "sentiment": "neutral",
+        "priority": 2,
+        "reason": "질문 형태",
+        "comment_id": "r02"
+      },
+      "draft": {
+        "reply": "@하루한판 질문 감사해요! 설명란에 자세히 적어두었어요. 더 궁금한 점은 DM으로 편하게 물어봐 주세요 🙌",
+        "action": "reply",
+        "comment_id": "r02",
+        "revision": 1
+      },
+      "review": {
+        "verdict": "approve",
+        "note": "톤·길이 OK",
+        "comment_id": "r02"
+      },
+      "publish": {
+        "comment_id": "r02",
+        "platform": "youtube",
+        "action": "reply",
+        "status": "dry-run"
+      }
+    },
+    {
+      "comment": {
+        "id": "r03",
+        "video_id": "my_yt01",
+        "author": "free_robux_kr",
+        "text": "로벅스 무료 수익 인증 https://bit.ly/xxxx",
+        "likes": 0,
+        "platform": "youtube",
+        "username": "free_robux_kr"
+      },
+      "class": {
+        "label": "spam",
+        "sentiment": "neutral",
+        "priority": 3,
+        "reason": "링크/홍보성 문구",
+        "comment_id": "r03"
+      },
+      "draft": {
+        "reply": null,
+        "action": "hide",
+        "comment_id": "r03",
+        "revision": 1
+      },
+      "review": {
+        "verdict": "approve",
+        "note": "스팸 → 숨김 처리",
+        "comment_id": "r03"
+      },
+      "publish": {
+        "comment_id": "r03",
+        "platform": "youtube",
+        "action": "hide",
+        "status": "dry-run"
+      }
+    },
+    {
+      "comment": {
+        "id": "r04",
+        "video_id": "my_ig01",
+        "author": "dev_hoon",
+        "text": "가이드대로 했는데 오류 나요. 버그 있는 것 같아요",
+        "likes": 8,
+        "platform": "instagram",
+        "username": "dev_hoon"
+      },
+      "class": {
+        "label": "complaint",
+        "sentiment": "negative",
+        "priority": 1,
+        "reason": "불만 표현",
+        "comment_id": "r04"
+      },
+      "draft": {
+        "reply": "@dev_hoon 불편을 드려 죄송해요. 상황을 자세히 확인하고 싶어서 DM 한 번 부탁드려도 될까요?",
+        "action": "reply",
+        "comment_id": "r04",
+        "revision": 1
+      },
+      "review": {
+        "verdict": "approve",
+        "note": "톤·길이 OK",
+        "comment_id": "r04"
+      },
+      "publish": {
+        "comment_id": "r04",
+        "platform": "instagram",
+        "action": "reply",
+        "status": "dry-run"
+      }
+    },
+    {
+      "comment": {
+        "id": "r05",
+        "video_id": "my_ig01",
+        "author": "brand_studio",
+        "text": "안녕하세요, 게임 콜라보 광고 문의 드리고 싶습니다",
+        "likes": 2,
+        "platform": "instagram",
+        "username": "brand_studio"
+      },
+      "class": {
+        "label": "collab",
+        "sentiment": "positive",
+        "priority": 1,
+        "reason": "협업 제안",
+        "comment_id": "r05"
+      },
+      "draft": {
+        "reply": "@brand_studio 제안 감사합니다! 프로필의 이메일로 내용 보내주시면 확인 후 연락드릴게요.",
+        "action": "reply",
+        "comment_id": "r05",
+        "revision": 1
+      },
+      "review": {
+        "verdict": "escalate",
+        "note": "협업 제안은 계정 주인이 직접 확인",
+        "comment_id": "r05"
+      },
+      "publish": {
+        "status": "needs-human",
+        "platform": "instagram"
+      }
+    },
+    {
+      "comment": {
+        "id": "r06",
+        "video_id": "my_ig01",
+        "author": "follow4follow",
+        "text": "선팔하고 갑니다 맞팔해요~",
+        "likes": 0,
+        "platform": "instagram",
+        "username": "follow4follow"
+      },
+      "class": {
+        "label": "spam",
+        "sentiment": "neutral",
+        "priority": 3,
+        "reason": "링크/홍보성 문구",
+        "comment_id": "r06"
+      },
+      "draft": {
+        "reply": null,
+        "action": "hide",
+        "comment_id": "r06",
+        "revision": 1
+      },
+      "review": {
+        "verdict": "approve",
+        "note": "스팸 → 숨김 처리",
+        "comment_id": "r06"
+      },
+      "publish": {
+        "comment_id": "r06",
+        "platform": "instagram",
+        "action": "hide",
+        "status": "dry-run"
+      }
+    },
+    {
+      "comment": {
+        "id": "r07",
+        "video_id": "my_tt01",
+        "author": "숲속곰",
+        "text": "사슴 나올 때 대박 ㅋㅋ 다음 영상 언제 올라와요?",
+        "likes": 340,
+        "platform": "tiktok",
+        "username": "숲속곰"
+      },
+      "class": {
+        "label": "question",
+        "sentiment": "neutral",
+        "priority": 2,
+        "reason": "질문 형태",
+        "comment_id": "r07"
+      },
+      "draft": {
+        "reply": "@숲속곰 질문 감사해요! 다음 영상은 지금 준비하고 있어요. 🙌",
+        "action": "reply",
+        "comment_id": "r07",
+        "revision": 2
+      },
+      "review": {
+        "verdict": "approve",
+        "note": "톤·길이 OK",
+        "comment_id": "r07"
+      },
+      "publish": {
+        "comment_id": "r07",
+        "platform": "tiktok",
+        "action": "reply",
+        "status": "manual"
+      }
+    },
+    {
+      "comment": {
+        "id": "r08",
+        "video_id": "my_tt01",
+        "author": "yejin_k",
+        "text": "오늘도 잘 보고 가요 👍",
+        "likes": 15,
+        "platform": "tiktok",
+        "username": "yejin_k"
+      },
+      "class": {
+        "label": "praise",
+        "sentiment": "positive",
+        "priority": 3,
+        "reason": "긍정 반응",
+        "comment_id": "r08"
+      },
+      "draft": {
+        "reply": "@yejin_k 좋게 봐주셔서 정말 감사해요 😊 다음 콘텐츠도 기대해 주세요!",
+        "action": "reply",
+        "comment_id": "r08",
+        "revision": 1
+      },
+      "review": {
+        "verdict": "approve",
+        "note": "톤·길이 OK",
+        "comment_id": "r08"
+      },
+      "publish": {
+        "comment_id": "r08",
+        "platform": "tiktok",
+        "action": "reply",
+        "status": "manual"
+      }
+    }
+  ],
+  "events": [
+    {
+      "t": 0.0,
+      "from": "orchestrator",
+      "to": "collector",
+      "kind": "start",
+      "payload": {
+        "source": "sample"
+      }
+    },
+    {
+      "t": 0.002,
+      "from": "collector",
+      "to": "orchestrator",
+      "kind": "collected",
+      "payload": {
+        "source": "sample",
+        "videos": 3,
+        "new": 8,
+        "platforms": [
+          "instagram",
+          "tiktok",
+          "youtube"
+        ]
+      }
+    },
+    {
+      "t": 0.002,
+      "from": "orchestrator",
+      "to": "reply_classifier",
+      "kind": "assign",
+      "payload": {
+        "comment_id": "r01",
+        "platform": "youtube",
+        "text": "무지개 터질 때 너무 귀여워요 😍 최고!"
+      }
+    },
+    {
+      "t": 0.003,
+      "from": "reply_classifier",
+      "to": "orchestrator",
+      "kind": "classified",
+      "payload": {
+        "label": "praise",
+        "sentiment": "positive",
+        "priority": 3,
+        "reason": "긍정 반응",
+        "comment_id": "r01"
+      }
+    },
+    {
+      "t": 0.003,
+      "from": "responder",
+      "to": "moderator",
+      "kind": "draft",
+      "payload": {
+        "reply": "@감자농부 좋게 봐주셔서 정말 감사해요 😊 다음 콘텐츠도 기대해 주세요!",
+        "action": "reply",
+        "comment_id": "r01",
+        "revision": 1
+      }
+    },
+    {
+      "t": 0.003,
+      "from": "moderator",
+      "to": "orchestrator",
+      "kind": "review",
+      "payload": {
+        "verdict": "approve",
+        "note": "톤·길이 OK",
+        "comment_id": "r01"
+      }
+    },
+    {
+      "t": 0.003,
+      "from": "publisher",
+      "to": "orchestrator",
+      "kind": "published",
+      "payload": {
+        "comment_id": "r01",
+        "platform": "youtube",
+        "action": "reply",
+        "status": "dry-run"
+      }
+    },
+    {
+      "t": 0.003,
+      "from": "orchestrator",
+      "to": "reply_classifier",
+      "kind": "assign",
+      "payload": {
+        "comment_id": "r03",
+        "platform": "youtube",
+        "text": "로벅스 무료 수익 인증 https://bit.ly/xxxx"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "reply_classifier",
+      "to": "orchestrator",
+      "kind": "classified",
+      "payload": {
+        "label": "spam",
+        "sentiment": "neutral",
+        "priority": 3,
+        "reason": "링크/홍보성 문구",
+        "comment_id": "r03"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "responder",
+      "to": "moderator",
+      "kind": "draft",
+      "payload": {
+        "reply": null,
+        "action": "hide",
+        "comment_id": "r03",
+        "revision": 1
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "moderator",
+      "to": "orchestrator",
+      "kind": "review",
+      "payload": {
+        "verdict": "approve",
+        "note": "스팸 → 숨김 처리",
+        "comment_id": "r03"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "publisher",
+      "to": "orchestrator",
+      "kind": "published",
+      "payload": {
+        "comment_id": "r03",
+        "platform": "youtube",
+        "action": "hide",
+        "status": "dry-run"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "orchestrator",
+      "to": "reply_classifier",
+      "kind": "assign",
+      "payload": {
+        "comment_id": "r04",
+        "platform": "instagram",
+        "text": "가이드대로 했는데 오류 나요. 버그 있는 것 같아요"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "reply_classifier",
+      "to": "orchestrator",
+      "kind": "classified",
+      "payload": {
+        "label": "complaint",
+        "sentiment": "negative",
+        "priority": 1,
+        "reason": "불만 표현",
+        "comment_id": "r04"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "responder",
+      "to": "moderator",
+      "kind": "draft",
+      "payload": {
+        "reply": "@dev_hoon 불편을 드려 죄송해요. 상황을 자세히 확인하고 싶어서 DM 한 번 부탁드려도 될까요?",
+        "action": "reply",
+        "comment_id": "r04",
+        "revision": 1
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "moderator",
+      "to": "orchestrator",
+      "kind": "review",
+      "payload": {
+        "verdict": "approve",
+        "note": "톤·길이 OK",
+        "comment_id": "r04"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "publisher",
+      "to": "orchestrator",
+      "kind": "published",
+      "payload": {
+        "comment_id": "r04",
+        "platform": "instagram",
+        "action": "reply",
+        "status": "dry-run"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "orchestrator",
+      "to": "reply_classifier",
+      "kind": "assign",
+      "payload": {
+        "comment_id": "r02",
+        "platform": "youtube",
+        "text": "이 게임 폰으로도 할 수 있나요?"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "reply_classifier",
+      "to": "orchestrator",
+      "kind": "classified",
+      "payload": {
+        "label": "question",
+        "sentiment": "neutral",
+        "priority": 2,
+        "reason": "질문 형태",
+        "comment_id": "r02"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "responder",
+      "to": "moderator",
+      "kind": "draft",
+      "payload": {
+        "reply": "@하루한판 질문 감사해요! 설명란에 자세히 적어두었어요. 더 궁금한 점은 DM으로 편하게 물어봐 주세요 🙌",
+        "action": "reply",
+        "comment_id": "r02",
+        "revision": 1
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "moderator",
+      "to": "orchestrator",
+      "kind": "review",
+      "payload": {
+        "verdict": "approve",
+        "note": "톤·길이 OK",
+        "comment_id": "r02"
+      }
+    },
+    {
+      "t": 0.004,
+      "from": "publisher",
+      "to": "orchestrator",
+      "kind": "published",
+      "payload": {
+        "comment_id": "r02",
+        "platform": "youtube",
+        "action": "reply",
+        "status": "dry-run"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "orchestrator",
+      "to": "reply_classifier",
+      "kind": "assign",
+      "payload": {
+        "comment_id": "r08",
+        "platform": "tiktok",
+        "text": "오늘도 잘 보고 가요 👍"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "reply_classifier",
+      "to": "orchestrator",
+      "kind": "classified",
+      "payload": {
+        "label": "praise",
+        "sentiment": "positive",
+        "priority": 3,
+        "reason": "긍정 반응",
+        "comment_id": "r08"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "responder",
+      "to": "moderator",
+      "kind": "draft",
+      "payload": {
+        "reply": "@yejin_k 좋게 봐주셔서 정말 감사해요 😊 다음 콘텐츠도 기대해 주세요!",
+        "action": "reply",
+        "comment_id": "r08",
+        "revision": 1
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "moderator",
+      "to": "orchestrator",
+      "kind": "review",
+      "payload": {
+        "verdict": "approve",
+        "note": "톤·길이 OK",
+        "comment_id": "r08"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "orchestrator",
+      "to": "reply_classifier",
+      "kind": "assign",
+      "payload": {
+        "comment_id": "r07",
+        "platform": "tiktok",
+        "text": "사슴 나올 때 대박 ㅋㅋ 다음 영상 언제 올라와요?"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "reply_classifier",
+      "to": "orchestrator",
+      "kind": "classified",
+      "payload": {
+        "label": "question",
+        "sentiment": "neutral",
+        "priority": 2,
+        "reason": "질문 형태",
+        "comment_id": "r07"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "responder",
+      "to": "moderator",
+      "kind": "draft",
+      "payload": {
+        "reply": "@숲속곰 질문 감사해요! 다음 영상은 지금 준비하고 있어요. 더 궁금한 점은 DM으로 편하게 물어봐 주세요 🙌",
+        "action": "reply",
+        "comment_id": "r07",
+        "revision": 1
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "moderator",
+      "to": "responder",
+      "kind": "review",
+      "payload": {
+        "verdict": "revise",
+        "note": "길이 61자 > 60자, 줄여주세요",
+        "comment_id": "r07"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "responder",
+      "to": "moderator",
+      "kind": "draft",
+      "payload": {
+        "reply": "@숲속곰 질문 감사해요! 다음 영상은 지금 준비하고 있어요. 🙌",
+        "action": "reply",
+        "comment_id": "r07",
+        "revision": 2
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "moderator",
+      "to": "orchestrator",
+      "kind": "review",
+      "payload": {
+        "verdict": "approve",
+        "note": "톤·길이 OK",
+        "comment_id": "r07"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "publisher",
+      "to": "orchestrator",
+      "kind": "published",
+      "payload": {
+        "comment_id": "r08",
+        "platform": "tiktok",
+        "action": "reply",
+        "status": "manual"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "orchestrator",
+      "to": "reply_classifier",
+      "kind": "assign",
+      "payload": {
+        "comment_id": "r06",
+        "platform": "instagram",
+        "text": "선팔하고 갑니다 맞팔해요~"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "reply_classifier",
+      "to": "orchestrator",
+      "kind": "classified",
+      "payload": {
+        "label": "spam",
+        "sentiment": "neutral",
+        "priority": 3,
+        "reason": "링크/홍보성 문구",
+        "comment_id": "r06"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "responder",
+      "to": "moderator",
+      "kind": "draft",
+      "payload": {
+        "reply": null,
+        "action": "hide",
+        "comment_id": "r06",
+        "revision": 1
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "moderator",
+      "to": "orchestrator",
+      "kind": "review",
+      "payload": {
+        "verdict": "approve",
+        "note": "스팸 → 숨김 처리",
+        "comment_id": "r06"
+      }
+    },
+    {
+      "t": 0.005,
+      "from": "publisher",
+      "to": "orchestrator",
+      "kind": "published",
+      "payload": {
+        "comment_id": "r06",
+        "platform": "instagram",
+        "action": "hide",
+        "status": "dry-run"
+      }
+    },
+    {
+      "t": 0.006,
+      "from": "publisher",
+      "to": "orchestrator",
+      "kind": "published",
+      "payload": {
+        "comment_id": "r07",
+        "platform": "tiktok",
+        "action": "reply",
+        "status": "manual"
+      }
+    },
+    {
+      "t": 0.006,
+      "from": "orchestrator",
+      "to": "reply_classifier",
+      "kind": "assign",
+      "payload": {
+        "comment_id": "r05",
+        "platform": "instagram",
+        "text": "안녕하세요, 게임 콜라보 광고 문의 드리고 싶습니다"
+      }
+    },
+    {
+      "t": 0.006,
+      "from": "reply_classifier",
+      "to": "orchestrator",
+      "kind": "classified",
+      "payload": {
+        "label": "collab",
+        "sentiment": "positive",
+        "priority": 1,
+        "reason": "협업 제안",
+        "comment_id": "r05"
+      }
+    },
+    {
+      "t": 0.006,
+      "from": "responder",
+      "to": "moderator",
+      "kind": "draft",
+      "payload": {
+        "reply": "@brand_studio 제안 감사합니다! 프로필의 이메일로 내용 보내주시면 확인 후 연락드릴게요.",
+        "action": "reply",
+        "comment_id": "r05",
+        "revision": 1
+      }
+    },
+    {
+      "t": 0.006,
+      "from": "moderator",
+      "to": "orchestrator",
+      "kind": "review",
+      "payload": {
+        "verdict": "escalate",
+        "note": "협업 제안은 계정 주인이 직접 확인",
+        "comment_id": "r05"
+      }
+    },
+    {
+      "t": 0.006,
+      "from": "orchestrator",
+      "to": "human",
+      "kind": "escalate",
+      "payload": {
+        "comment_id": "r05",
+        "note": "협업 제안은 계정 주인이 직접 확인"
+      }
+    },
+    {
+      "t": 0.006,
+      "from": "orchestrator",
+      "to": "report",
+      "kind": "summary",
+      "payload": {
+        "dry-run": 5,
+        "needs-human": 1,
+        "manual": 2
+      }
+    }
+  ]
+}

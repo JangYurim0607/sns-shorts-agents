@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SNS Shorts Agents · 자동 답글 모드</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --line:#262b36; --text:#e8eaf0; --sub:#8b93a7;
+    --pink:#ff4f8b; --violet:#8b5cf6; --orange:#ffb020;
+    --q:#3b82f6; --p:#22c55e; --c:#ef4444; --co:#a855f7; --s:#6b7280; --o:#94a3b8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:"Pretendard","Noto Sans CJK KR","Noto Sans KR",system-ui,sans-serif}
+  header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid var(--line)}
+  h1{font-size:20px;margin:0;font-weight:700;letter-spacing:-.3px}
+  h1 span{background:linear-gradient(90deg,var(--orange),var(--pink),var(--violet));-webkit-background-clip:text;color:transparent}
+  .controls{display:flex;gap:8px;align-items:center}
+  button{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer}
+  button.primary{background:var(--pink);border-color:var(--pink);color:#fff;font-weight:600}
+  main{display:grid;grid-template-columns:minmax(380px,1fr) 1.25fr;gap:20px;padding:20px 28px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px}
+  /* post */
+  .post-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+  .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--pink),var(--violet));flex:none}
+  .post-img{height:120px;background:linear-gradient(135deg,#2a1f3d,#3d1f2f 60%,#3d2d1f);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:22px}
+  .comments{padding:6px 16px 14px;max-height:calc(100vh - 170px);overflow:auto}
+  .vh{display:flex;gap:8px;align-items:center;margin:14px 0 4px;font-weight:700;font-size:14px}
+  .pf{font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;color:#fff}
+  .pf.youtube{background:#e11d48}.pf.instagram{background:linear-gradient(90deg,#f59e0b,#ec4899,#8b5cf6)}.pf.tiktok{background:#111;border:1px solid #444}
+  .cm{padding:10px 0;border-bottom:1px solid var(--line);transition:background .3s}
+  .cm.active{background:rgba(255,79,139,.07)}
+  .cm .u{font-weight:700;font-size:14px;margin-right:6px}
+  .cm .t{font-size:14px}
+  .cm.hidden-c .t{text-decoration:line-through;color:var(--sub)}
+  .badges{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+  .b{font-size:11px;padding:2px 8px;border-radius:999px;font-weight:600;color:#fff}
+  .reply{margin:8px 0 0 22px;padding:8px 10px;border-left:2px solid var(--pink);font-size:13px;color:#d6d9e2;background:rgba(255,255,255,.03);border-radius:0 8px 8px 0}
+  .reply .who{color:var(--pink);font-weight:700;margin-right:4px}
+  /* graph */
+  .graph{position:relative;height:330px}
+  .node{position:absolute;width:150px;padding:10px;border-radius:12px;background:#1d212b;border:1.5px solid var(--line);text-align:center;transition:all .25s}
+  .node b{display:block;font-size:14px}
+  .node small{color:var(--sub);font-size:11px}
+  .node.on{border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,79,139,.18);transform:scale(1.05)}
+  svg.links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  svg.links path{stroke:#333a48;stroke-width:2;fill:none}
+  svg.links path.on{stroke:var(--pink);stroke-width:3}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 16px 16px}
+  .stat{background:#1d212b;border-radius:10px;padding:10px;text-align:center}
+  .stat b{font-size:24px;display:block}
+  .stat small{color:var(--sub);font-size:12px}
+  .log{font-family:ui-monospace,Menlo,monospace;font-size:12px;height:calc(100vh - 610px);min-height:150px;overflow:auto;padding:12px 16px;border-top:1px solid var(--line)}
+  .log div{padding:2px 0;color:#c4c9d6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .log .k{color:var(--orange)}
+  .sec{padding:12px 16px 6px;font-size:13px;color:var(--sub);font-weight:600}
+  .mode{font-size:12px;color:var(--sub)}
+</style>
+</head>
+<body>
+<header>
+  <h1><span>SNS Shorts Agents</span> · 자동 답글 모드 (유튜브 · 인스타 · 틱톡)</h1>
+  <div class="controls">
+    <span class="mode" id="mode"></span>
+    <button id="speed">속도 1x</button>
+    <button id="reset">처음으로</button>
+    <button class="primary" id="play">▶ 재생</button>
+  </div>
+</header>
+<main>
+  <section class="card">
+    <div class="post-head"><div class="avatar"></div><div><b>내 계정</b><div class="mode">숏츠 3개 · 새 댓글 <span id="ccount"></span>개</div></div></div>
+    <div class="comments" id="comments"></div>
+  </section>
+  <section class="card">
+    <div class="sec">에이전트 협업 흐름</div>
+    <div class="graph" id="graph">
+      <svg class="links" id="links"></svg>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="s-reply">0</b><small>답글</small></div>
+      <div class="stat"><b id="s-hide">0</b><small>스팸 숨김</small></div>
+      <div class="stat"><b id="s-rev">0</b><small>수정 요청</small></div>
+      <div class="stat"><b id="s-human">0</b><small>사람 확인</small></div>
+    </div>
+    <div class="log" id="log"></div>
+  </section>
+</main>
+<script src="latest_reply.js"></script>
+<script>
+const RUN = window.RUN;
+const COLORS = {question:"var(--q)",praise:"var(--p)",complaint:"var(--c)",collab:"var(--co)",spam:"var(--s)",other:"var(--o)"};
+const KO = {question:"질문",praise:"칭찬",complaint:"불만",collab:"협업",spam:"스팸",other:"기타"};
+const NODES = {
+  orchestrator:{x:.5,y:.08,label:"Orchestrator",sub:"작업 분배·취합"},
+  collector:{x:.12,y:.42,label:"① Collector",sub:"새 댓글 수집"},
+  reply_classifier:{x:.38,y:.42,label:"② Classifier",sub:"유형·우선순위"},
+  responder:{x:.64,y:.42,label:"③ Responder",sub:"답글 초안"},
+  moderator:{x:.64,y:.82,label:"④ Moderator",sub:"검수·승인"},
+  publisher:{x:.88,y:.82,label:"⑤ Publisher",sub:"유튜브·인스타·틱톡"},
+  human:{x:.36,y:.82,label:"🙋 사람 확인",sub:"에스컬레이션"},
+};
+const graph = document.getElementById('graph'), svg = document.getElementById('links');
+function pos(n){const r=graph.getBoundingClientRect();return {x:NODES[n].x*r.width,y:NODES[n].y*r.height};}
+function drawGraph(){
+  graph.querySelectorAll('.node').forEach(e=>e.remove());
+  for(const [k,n] of Object.entries(NODES)){
+    const d=document.createElement('div');d.className='node';d.id='n-'+k;
+    d.innerHTML=`<b>${n.label}</b><small>${n.sub}</small>`;
+    const p=pos(k);d.style.left=(p.x-75)+'px';d.style.top=(p.y-26)+'px';graph.appendChild(d);
+  }
+  const pairs=[["orchestrator","collector"],["orchestrator","reply_classifier"],["reply_classifier","responder"],["responder","moderator"],["moderator","publisher"],["moderator","human"],["orchestrator","responder"],["publisher","orchestrator"]];
+  svg.innerHTML=pairs.map(([a,b])=>{const p=pos(a),q=pos(b);return `<path id="l-${a}-${b}" d="M${p.x},${p.y} L${q.x},${q.y}"/>`}).join('');
+}
+const comments=document.getElementById('comments');
+function drawComments(){
+  const list=RUN.results.map(r=>r.comment);
+  document.getElementById('ccount').textContent=list.length;
+  const PN={youtube:"YouTube",instagram:"Instagram",tiktok:"TikTok"};
+  comments.innerHTML=RUN.videos.map(v=>`<div class="vh"><span class="pf ${v.platform}">${PN[v.platform]}</span>${v.title}</div>`+
+    list.filter(c=>c.video_id===v.id).map(c=>`<div class="cm" id="c-${c.id}"><span class="u">${c.username}</span><span class="t">${c.text}</span><div class="badges"></div></div>`).join('')).join('');
+}
+const modes=Object.values(RUN.agent_modes);
+document.getElementById('mode').textContent = modes.every(m=>m.startsWith('LLM'))?'LLM + SKILL.md 모드':'데모(rule-based) 모드';
+
+let i=0, timer=null, speed=1, stats={reply:0,hide:0,rev:0,human:0};
+const logEl=document.getElementById('log');
+const byId=Object.fromEntries(RUN.results.map(r=>[r.comment.id,r]));
+function flash(from,to){
+  document.querySelectorAll('.node.on,path.on').forEach(e=>e.classList.remove('on'));
+  const target = to==='report'?'orchestrator':to;
+  [from,target].forEach(n=>{const e=document.getElementById('n-'+n);e&&e.classList.add('on')});
+  const l=document.getElementById(`l-${from}-${target}`)||document.getElementById(`l-${target}-${from}`);l&&l.classList.add('on');
+}
+function badge(el,txt,color){const b=document.createElement('span');b.className='b';b.style.background=color;b.textContent=txt;el.querySelector('.badges').appendChild(b);}
+function step(){
+  if(i>=RUN.events.length){stop();return;}
+  const e=RUN.events[i++], p=e.payload, cid=p.comment_id;
+  flash(e.from,e.to);
+  document.querySelectorAll('.cm.active').forEach(x=>x.classList.remove('active'));
+  const el=cid&&document.getElementById('c-'+cid);
+  if(el){el.classList.add('active');el.scrollIntoView({block:'nearest',behavior:'smooth'});}
+  if(e.kind==='classified'&&el) badge(el,`${KO[p.label]} · P${p.priority}`,COLORS[p.label]);
+  if(e.kind==='review'&&p.verdict==='revise'){stats.rev++; el&&badge(el,'✏️ 수정 요청','#b45309');}
+  if(e.kind==='published'&&el){
+    const ST={"dry-run":"게시 대기 (dry-run)",posted:"게시됨",hidden:"숨김",manual:"틱톡 CSV에 저장"};
+    if(p.action==='hide'){stats.hide++;el.classList.add('hidden-c');badge(el,'🚫 숨김 · '+ST[p.status],'#374151');}
+    else{stats.reply++;const d=byId[cid].draft;const r=document.createElement('div');r.className='reply';r.innerHTML=`<span class="who">나</span>${d.reply}`;el.appendChild(r);badge(el,ST[p.status],p.status==='manual'?'#0f766e':'#15803d');}
+  }
+  if(e.kind==='escalate'&&el){stats.human++;badge(el,'🙋 사람 확인','#7c3aed');}
+  for(const k in stats) document.getElementById('s-'+({reply:'reply',hide:'hide',rev:'rev',human:'human'})[k]).textContent=stats[k];
+  const line=document.createElement('div');
+  line.innerHTML=`<span class="k">${e.from} → ${e.to}</span> ${e.kind} ${JSON.stringify(p).slice(0,110)}`;
+  logEl.appendChild(line);logEl.scrollTop=logEl.scrollHeight;
+}
+function play(){if(timer)return;document.getElementById('play').textContent='⏸ 일시정지';timer=setInterval(step,420/speed);}
+function stop(){clearInterval(timer);timer=null;document.getElementById('play').textContent='▶ 재생';}
+function reset(){stop();i=0;stats={reply:0,hide:0,rev:0,human:0};logEl.innerHTML='';drawComments();['reply','hide','rev','human'].forEach(k=>document.getElementById('s-'+k).textContent=0);document.querySelectorAll('.on').forEach(e=>e.classList.remove('on'));}
+document.getElementById('play').onclick=()=>timer?stop():play();
+document.getElementById('reset').onclick=reset;
+document.getElementById('speed').onclick=()=>{speed=speed===1?2:speed===2?0.5:1;document.getElementById('speed').textContent=`속도 ${speed}x`;if(timer){stop();play();}};
+window.addEventListener('resize',drawGraph);
+drawGraph();drawComments();
+const q=new URLSearchParams(location.search);
+if(q.get('autoplay')) setTimeout(play,800);
+</script>
+</body>
+</html>

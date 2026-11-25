@@ -1,0 +1,227 @@
+{
+ "_note": "시연용 가상 데이터입니다. 영상 제목·작성자·댓글은 모두 지어낸 예시입니다.",
+ "videos": [
+  {
+   "id": "yt01",
+   "platform": "youtube",
+   "game": "Grow a Garden",
+   "title": "무지개 씨앗 1000개 심으면 생기는 일",
+   "url": "https://www.youtube.com/shorts/sample-yt01",
+   "views": 1830000,
+   "likes": 64000
+  },
+  {
+   "id": "ig01",
+   "platform": "instagram",
+   "game": "Grow a Garden",
+   "title": "친구 텃밭 몰래 털기 성공?",
+   "url": "https://www.instagram.com/reel/sample-ig01",
+   "views": null,
+   "likes": 21000
+  },
+  {
+   "id": "yt02",
+   "platform": "youtube",
+   "game": "99 Nights in the Forest",
+   "title": "99일 밤 숲에서 혼자 버티기 마지막 밤",
+   "url": "https://www.youtube.com/shorts/sample-yt02",
+   "views": 2410000,
+   "likes": 98000
+  },
+  {
+   "id": "tt01",
+   "platform": "tiktok",
+   "game": "99 Nights in the Forest",
+   "title": "사슴한테 들킨 순간",
+   "url": "https://www.tiktok.com/@sample/video/tt01",
+   "views": 870000,
+   "likes": 45000
+  },
+  {
+   "id": "yt03",
+   "platform": "youtube",
+   "game": "Minecraft",
+   "title": "1분 안에 집 짓기 챌린지",
+   "url": "https://www.youtube.com/shorts/sample-yt03",
+   "views": 640000,
+   "likes": 18000
+  }
+ ],
+ "comments": [
+  {
+   "id": "c01",
+   "video_id": "yt01",
+   "author": "감자농부",
+   "text": "0:14 무지개 터질 때 소리 지름 ㅋㅋㅋ 레전드",
+   "likes": 2300
+  },
+  {
+   "id": "c02",
+   "video_id": "yt01",
+   "author": "하루한판",
+   "text": "이거 폰으로도 할 수 있어요? 게임 이름 뭐예요",
+   "likes": 410
+  },
+  {
+   "id": "c03",
+   "video_id": "yt01",
+   "author": "민트초코",
+   "text": "다음엔 황금 씨앗으로 해주세요!!",
+   "likes": 1800
+  },
+  {
+   "id": "c04",
+   "video_id": "yt01",
+   "author": "glitch_kr",
+   "text": "무지개 씨앗 확률 진짜 레전드네",
+   "likes": 950
+  },
+  {
+   "id": "c05",
+   "video_id": "yt01",
+   "author": "free_robux_kr",
+   "text": "로벅스 무료로 받는 법 프로필 링크 https://bit.ly/xxxx",
+   "likes": 3
+  },
+  {
+   "id": "c06",
+   "video_id": "ig01",
+   "author": "sora.plays",
+   "text": "마지막에 친구 표정 킹받네 ㅋㅋㅋ",
+   "likes": 1200
+  },
+  {
+   "id": "c07",
+   "video_id": "ig01",
+   "author": "dalgom_",
+   "text": "훔치는 거 어떻게 하는 거예요? 방법 알려주세요",
+   "likes": 640
+  },
+  {
+   "id": "c08",
+   "video_id": "ig01",
+   "author": "yujin.k",
+   "text": "자막이 너무 작아서 안 보여요 ㅠ",
+   "likes": 380
+  },
+  {
+   "id": "c09",
+   "video_id": "ig01",
+   "author": "nabi_99",
+   "text": "2편 해주세요 친구 복수편!!",
+   "likes": 2100
+  },
+  {
+   "id": "c10",
+   "video_id": "ig01",
+   "author": "follow4follow",
+   "text": "선팔하고 가요 맞팔해요~",
+   "likes": 0
+  },
+  {
+   "id": "c11",
+   "video_id": "yt02",
+   "author": "숲속곰",
+   "text": "0:38 사슴 나올 때 진짜 심장 떨어짐",
+   "likes": 5400
+  },
+  {
+   "id": "c12",
+   "video_id": "yt02",
+   "author": "night_owl",
+   "text": "마지막 밤 반전 킹받네 ㅋㅋㅋㅋ",
+   "likes": 3100
+  },
+  {
+   "id": "c13",
+   "video_id": "yt02",
+   "author": "초보캠퍼",
+   "text": "이 게임 혼자서도 할 수 있나요? 무슨 게임이에요",
+   "likes": 870
+  },
+  {
+   "id": "c14",
+   "video_id": "yt02",
+   "author": "모닥불",
+   "text": "친구 4명이서 하는 버전도 해주세요",
+   "likes": 2600
+  },
+  {
+   "id": "c15",
+   "video_id": "yt02",
+   "author": "레몬티",
+   "text": "영상이 너무 길어요 중간에 늘어짐",
+   "likes": 290
+  },
+  {
+   "id": "c16",
+   "video_id": "tt01",
+   "author": "hyun_tok",
+   "text": "0:05 사슴 눈 마주침 레전드 ㅋㅋㅋ",
+   "likes": 4200
+  },
+  {
+   "id": "c17",
+   "video_id": "tt01",
+   "author": "bbang_ya",
+   "text": "사슴 피하는 법 알려주세요 어떻게 숨어요?",
+   "likes": 1500
+  },
+  {
+   "id": "c18",
+   "video_id": "tt01",
+   "author": "coin_daily",
+   "text": "💰하루 30만원 부업 DM주세요",
+   "likes": 1
+  },
+  {
+   "id": "c19",
+   "video_id": "tt01",
+   "author": "ㅇㅇ",
+   "text": "재밌어요",
+   "likes": 12
+  },
+  {
+   "id": "c20",
+   "video_id": "tt01",
+   "author": "dark_mode",
+   "text": "썸네일 낚시임 사슴 별로 안 나옴",
+   "likes": 330
+  },
+  {
+   "id": "c21",
+   "video_id": "yt03",
+   "author": "블록장인",
+   "text": "0:41 지붕 올리는 거 미쳤다",
+   "likes": 880
+  },
+  {
+   "id": "c22",
+   "video_id": "yt03",
+   "author": "creeper_no",
+   "text": "30초 챌린지도 해주세요",
+   "likes": 1100
+  },
+  {
+   "id": "c23",
+   "video_id": "yt03",
+   "author": "mc_kid",
+   "text": "이거 무슨 모드 써요?",
+   "likes": 260
+  },
+  {
+   "id": "c24",
+   "video_id": "yt03",
+   "author": "ㅋㅋ",
+   "text": "👍",
+   "likes": 4
+  },
+  {
+   "id": "c25",
+   "video_id": "yt03",
+   "author": "steve_kr",
+   "text": "15초 버전도 해주세요 ㅋㅋ",
+   "likes": 700
+  }
+ ]
+}
